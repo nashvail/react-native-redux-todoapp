@@ -1,6 +1,7 @@
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import {
-  ADD_TASK
+  ADD_TASK,
+  TOGGLE_TASK
 } from './constants';
 
 const INITIAL_STATE = Map({
@@ -42,6 +43,8 @@ export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case ADD_TASK:
       return state.updateIn(['tasks'], tasks => addTask(tasks, action.task));
+    case TOGGLE_TASK:
+      return state.updateIn(['tasks'], tasks => toggleTask(tasks, action.id));
     default:
       return state;
   }

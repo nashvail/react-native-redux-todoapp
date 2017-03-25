@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { List, Map } from 'immutable';
 import immutable from 'immutable';
 
-import TaskItem from './TaskItem';
+import { TaskItemContainer } from './TaskItem';
 import { HeaderContainer } from './Header';
 
 const styles = StyleSheet.create({
@@ -20,14 +20,17 @@ const ds = new ListView.DataSource({
 });
 
 const renderRow = (rowData) => (
-  <TaskItem text={rowData.get('text')} completed={rowData.get('complete')} />
+  <TaskItemContainer 
+    id={rowData.get('id')} 
+    text={rowData.get('text')} 
+    completed={rowData.get('complete')} />
 );
 
 const renderSeparator = (sectionId, rowId) => (
   <View key={rowId} style={styles.separator} />
 );
 
-const TaskList = ({
+export const TaskList = ({
   tasks
 }) =>  (
     <ListView
