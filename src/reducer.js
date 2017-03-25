@@ -1,11 +1,16 @@
 import { List, Map, fromJS } from 'immutable';
 import {
   ADD_TASK,
-  TOGGLE_TASK
+  TOGGLE_TASK,
+  CHANGE_FILTER,
+  FILTER_ACTIVE,
+  FILTER_ALL,
+  FILTER_COMPLETE
 } from './constants';
 
 const INITIAL_STATE = Map({
-  tasks: List()
+  tasks: List(),
+  filter: FILTER_ALL
 });
 
 let counter = 0;
@@ -45,6 +50,8 @@ export default function(state = INITIAL_STATE, action) {
       return state.updateIn(['tasks'], tasks => addTask(tasks, action.task));
     case TOGGLE_TASK:
       return state.updateIn(['tasks'], tasks => toggleTask(tasks, action.id));
+    case CHANGE_FILTER:
+      return state.set('filter', action.filter);
     default:
       return state;
   }

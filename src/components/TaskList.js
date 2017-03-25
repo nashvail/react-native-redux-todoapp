@@ -7,6 +7,13 @@ import immutable from 'immutable';
 import { TaskItemContainer } from './TaskItem';
 import { HeaderContainer } from './Header';
 
+import {
+  CHANGE_FILTER,
+  FILTER_ALL,
+  FILTER_ACTIVE,
+  FILTER_COMPLETE
+} from '../constants';
+
 const styles = StyleSheet.create({
   separator: {
     flex: 1,
@@ -30,13 +37,29 @@ const renderSeparator = (sectionId, rowId) => (
   <View key={rowId} style={styles.separator} />
 );
 
+const filteredTasks = (tasks, filter) => { 
+  switch(filter) {
+    case FILTER_ALL:
+      return tasks.toArray();
+    case FILTER_ACTIVE:
+      return tasks.filter(task => !task.get('complete'))
+        .toArray();
+    case FILTER_COMPLETE:
+      return tasks.filter(task => task.get('complete'))
+        .toArray();
+    default:
+      return tasks.toArray();
+  }
+};
+
 export const TaskList = ({
-  tasks
+  tasks,
+  filter
 }) =>  (
     <ListView
       stickyHeaderIndices={[0]}
       renderSeparator={renderSeparator}
-      dataSource={ds.cloneWithRows(tasks.toArray())}
+      dataSource={ds.cloneWithRows(filteredTasks(tasks, filter))}
       renderRow={renderRow}
       renderHeader={() => <HeaderContainer />}
       keyboardShouldPersistTaps="handled"
@@ -45,7 +68,8 @@ export const TaskList = ({
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.get('tasks')
+    tasks: state.get('tasks'),
+    filter: state.get('filter')
   }
 };
 

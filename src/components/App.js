@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, SegmentedControlIOS, ListView } from 'react-nat
 import NavigationBar from 'react-native-navbar';
 
 import { TaskListContainer } from './TaskList';
+import { FilterControlContainer } from './FilterControl';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,14 +21,8 @@ export default class App extends Component {
   render() {
     return  <View style={styles.container}>
       <NavigationBar title={titleConfig} />
-
-      <SegmentedControlIOS
-        values={navigationSegments}
-        selectedIndex={0}
-      />
-
+      <FilterControlContainer />
       <TaskListContainer />
-
     </View>;
   }
 }
