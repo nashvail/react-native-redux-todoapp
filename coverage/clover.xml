@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1490363385875" clover="3.2.0">
+  <project timestamp="1490363385875" name="All files">
+    <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2" elements="10" coveredelements="8" complexity="0" loc="6" ncloc="6" packages="1" files="2" classes="2">
+      <file name="index.android.js" path="/Users/Nishant/Developer/ToDoList/index.android.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+      </file>
+      <file name="index.ios.js" path="/Users/Nishant/Developer/ToDoList/index.ios.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+      </file>
+    </metrics>
+  </project>
+</coverage>
