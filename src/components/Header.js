@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+
+import { addTask } from '../action_creators';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,16 +35,47 @@ const styles = StyleSheet.create({
   }
 });
 
-const Header = () => (
-  <View style={styles.container}>
-    <TextInput
-      style={styles.input}
-      placeholder="Task.."
-    />
-    <TouchableOpacity style={styles.button}>
-      <Text style={styles.text}>+</Text>
-    </TouchableOpacity>
-  </View>
-);
+export class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: ''
+    }
+  }
 
-export default Header;
+  handleChangeText = (text) => {
+    this.setState({ text });
+  }
+
+  handleTaskSubmit = () => {
+    const { dispatch } = this.props;
+
+    dispatch(addTask(this.state.text));
+
+    this.textInput.clear();
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          blurOnSubmit
+          ref={component => { this.textInput = component; }}
+          returnKeyType="done"
+          placeholder="Task.."
+          onChangeText={this.handleChangeText}
+          onSubmitEditing={this.handleTaskSubmit}
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.handleTaskSubmit}
+        >
+          <Text style={styles.text}>+</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
+
+export const HeaderContainer = connect()(Header);

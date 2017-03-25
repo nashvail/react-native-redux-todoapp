@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { ListView, StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import immutable from 'immutable';
 
 import TaskItem from './TaskItem';
-import Header from './Header';
+import { HeaderContainer } from './Header';
 
 const styles = StyleSheet.create({
   separator: {
@@ -35,12 +35,15 @@ const TaskList = ({
       renderSeparator={renderSeparator}
       dataSource={ds.cloneWithRows(tasks.toArray())}
       renderRow={renderRow}
-      renderHeader={() => <Header />}
+      renderHeader={() => <HeaderContainer />}
+      keyboardShouldPersistTaps="handled"
     />
   );
 
-const mapStateToProps = (state) => ({
-  tasks: state.getIn('tasks', List())
-});
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.get('tasks')
+  }
+};
 
 export const TaskListContainer = connect(mapStateToProps)(TaskList)

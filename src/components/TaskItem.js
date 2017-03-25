@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,12 +22,11 @@ export default TaskItem = ({
   text,
   completed
 }) => (
-  <TouchableHighlight 
+  <TouchableOpacity
     style={styles.container}
-    activeOpacity={0.5}
     onPress={() => console.log('wtf')}>
     <Text style={completed ? styles.textCompleted : styles.text }>
       {text}
     </Text>
-  </TouchableHighlight>
+  </TouchableOpacity>
 );

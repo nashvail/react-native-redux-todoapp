@@ -6,6 +6,7 @@ import { Map, List, fromJS } from 'immutable';
 import * as matchers from 'jest-immutable-matchers';
 
 import reducer from '../src/reducer';
+import { addTask } from '../src/action_creators';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
@@ -41,7 +42,7 @@ describe('reducer', () => {
 
   it('handles ADD_TASK when state is empty', () => {
 
-    const state = Map();
+    const state = undefined;
     const action = {type: 'ADD_TASK', task: {
       text: 'Hello world',
       complete: false
