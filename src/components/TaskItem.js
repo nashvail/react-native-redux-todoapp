@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const ToDoItem = ({
+export default TaskItem = ({
   text,
   completed
 }) => (
@@ -31,5 +31,3 @@ const ToDoItem = ({
     </Text>
   </TouchableHighlight>
 );
-
-export default ToDoItem;
