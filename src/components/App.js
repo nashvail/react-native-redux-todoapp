@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 });
 
 const titleConfig = {
-  title: 'ToDo List',
+  title: 'Tasks',
 };
 
 const navigationSegments = ['All', 'Active', 'Complete'];

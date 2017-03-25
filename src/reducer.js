@@ -23,6 +23,7 @@ const addTask = (tasks, task) => {
   }));
 }
 
+// TODO: Improve
 const toggleTask = (tasks, id) => {
   let updateIndex = 0;
   let updateTask = Map();
