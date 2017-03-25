@@ -18,28 +18,36 @@ const ALL = 0,
   COMPLETE = 2;
 
 export const FilterControl = ({
-  dispatch
+  onFilterChange
 }) => (
-  <SegmentedControlIOS
-    values={filters}
-    selectedIndex={0}
-    onChange={ event => {
-      const filterIndex = event.nativeEvent.selectedSegmentIndex;
-      switch(event.nativeEvent.selectedSegmentIndex) {
-        case ALL:
-          dispatch(changeFilter(FILTER_ALL));
-        break;
-        case ACTIVE: 
-          dispatch(changeFilter(FILTER_ACTIVE));
-        break;
-        case COMPLETE:
-          dispatch(changeFilter(FILTER_COMPLETE));
-        break;
-        default:
-          dispatch(changeFilter(FILTER_ALL));
-      }
-    }}
-  />
-);
+    <SegmentedControlIOS
+      values={filters}
+      selectedIndex={0}
+      onChange={event => {
+        onFilterChange(event.nativeEvent.selectedSegmentIndex);
+      }}
+    />
+  );
 
-export const FilterControlContainer = connect()(FilterControl);
+const mapDispatchToProps = (dispatch) => ({
+  onFilterChange: (filterIndex) => {
+    switch (filterIndex) {
+      case ALL:
+        dispatch(changeFilter(FILTER_ALL));
+        break;
+      case ACTIVE:
+        dispatch(changeFilter(FILTER_ACTIVE));
+        break;
+      case COMPLETE:
+        dispatch(changeFilter(FILTER_COMPLETE));
+        break;
+      default:
+        dispatch(changeFilter(FILTER_ALL));
+    }
+  }
+});
+
+export const FilterControlContainer = connect(
+  undefined,
+  mapDispatchToProps
+)(FilterControl);

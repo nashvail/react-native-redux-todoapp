@@ -57,6 +57,7 @@ export const TaskList = ({
   filter
 }) =>  (
     <ListView
+      enableEmptySections
       stickyHeaderIndices={[0]}
       renderSeparator={renderSeparator}
       dataSource={ds.cloneWithRows(filteredTasks(tasks, filter))}
