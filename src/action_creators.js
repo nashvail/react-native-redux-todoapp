@@ -1,6 +1,7 @@
 import {
   ADD_TASK,
   TOGGLE_TASK,
+  DELETE_TASK,
   CHANGE_FILTER
 } from './constants';
 
@@ -14,7 +15,12 @@ export const toggleTask = (id) => ({
   id
 });
 
+export const deleteTask = (id) => ({
+  type: DELETE_TASK,
+  id
+});
+
 export const changeFilter = (filter) => ({
   type: CHANGE_FILTER,
   filter
-})
+});

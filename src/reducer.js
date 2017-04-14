@@ -3,6 +3,7 @@ import { List, Map, fromJS } from 'immutable';
 import {
   ADD_TASK,
   TOGGLE_TASK,
+  DELETE_TASK,
   CHANGE_FILTER,
   FILTER_ACTIVE,
   FILTER_ALL,
@@ -45,6 +46,17 @@ const toggleTask = (tasks, id) => {
   }));
 }
 
+const deleteTask = (tasks, id) => {
+  let updateIndex = 0;
+  tasks.forEach((task, index) => {
+    if (task.get('id') === id) {
+      updateIndex = index;
+      return false;
+    }
+  });
+  return tasks.delete(updateIndex);
+};
+
 const saveTasks = async (tasks) => {
   try {
     await AsyncStorage.setItem(STORAGE_TASKS, JSON.stringify(tasks.toJS()));
@@ -67,6 +79,10 @@ export default function (state = INITIAL_STATE, action) {
       const ns2 = state.updateIn(['tasks'], tasks => toggleTask(tasks, action.id));
       saveTasks(ns2.get('tasks'));
       return ns2;
+    case DELETE_TASK:
+      const ns3 = state.updateIn(['tasks'], tasks => deleteTask(tasks, action.id));
+      saveTasks(ns3.get('tasks'));
+      return ns3;
     case CHANGE_FILTER:
       return state.set('filter', action.filter);
     case LOAD_TASKS_FROM_STORAGE:
